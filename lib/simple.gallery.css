@@ -1,0 +1,92 @@
+.simple_gallery{
+  width: 700px;
+  height: 400px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #000;
+}
+
+.simple_gallery .slide_panel{
+  position: absolute;
+  clear: both;
+  height: 400px;
+}
+
+.simple_gallery .slide_padder{
+  width: 700px;
+  height: 400px;
+  float: left;
+}
+
+
+.simple_gallery .slide_valigner{
+  width: 700px;
+  height: 400px;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+
+.simple_gallery .nav_left{
+  position: absolute;
+  left: 25px;
+  top: 50%;
+}
+
+
+.simple_gallery .nav_right{
+  position: absolute;
+  right: 25px;
+  top: 50%;
+}
+
+.simple_gallery .title_desc{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.sg_black{
+  border: 15px solid #000;
+  width: 702px;
+}
+
+.sg_black .sg_border{
+  border: 1px solid #fff;
+}
+
+.sg_black .simple_gallery{
+  border: 10px solid #000;
+  width: 680px;
+}
+
+.sg_black .simple_gallery  .slide_padder{
+  width: 680px;
+}
+
+.sg_black .simple_gallery .desc{
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 680px;
+    font-family: Georgia, serif;
+    font-size: 11px;
+}
+
+
+.sg_black .simple_gallery .title_desc{
+  left: 10px;
+  top: 10px;
+  font-family: Verdana, Verdana, Geneva, sans-serif
+}
+
+.sg_black .simple_gallery .title_desc .indicator{
+  color: #999;
+}
+
+.sg_black .simple_gallery .title_desc .indicator .currentNum, .sg_black .simple_gallery .title_desc .indicator .totalNum{
+  color: #000;
+  font-weight: bold;
+}

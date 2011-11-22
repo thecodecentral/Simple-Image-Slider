@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <title>SimpleGallery Script | Code Central</title>
+
+    <link rel='stylesheet' href='lib/simple.gallery.css' type='text/css' media='all' />
+
+  </head>
+  <body>
+
+    <h1><a href="http://thecodecentral.com/2011/11/22/object-oriented-way-of-creating-a-jquery-image-slider">Documentation</a></h1>
+    
+    <p>Scroll down to see more!</p>
+    
+    <ul id="gallery_data">
+      <li><img src="images/1.jpg" alt="Image 1" title="Description of the image 1"/></li>
+      <li><img src="images/2.jpg" alt="Image 2" title="Description of the image 2"/></li>
+      <li><img src="images/3.jpg" alt="Image 3" title="Description of the image 3"/></li>
+      <li><img src="images/4.jpg" alt="Image 4" title="Description of the image 4"/></li>
+      <li><img src="images/5.jpg" alt="Image 5" title="Description of the image 5"/></li>
+      <li><img src="images/6.jpg" alt="Image 6" title="Description of the image 6"/></li>
+      <li><img src="images/7.jpg" alt="Image 7" title="Description of the image 7"/></li>
+    </ul>
+
+    <h2>Default - Barebone Version</h2>
+    <div id="gallery" class="simple_gallery" style="display:none"></div>
+
+    <h2>Customized version using renderers</h2>
+    <div id="gallery2" class="simple_gallery" style="display:none"></div>
+
+
+    <h2>Themed version</h2>
+    <div class="sg_black" style="display:none">
+      <div class="sg_border">
+        <div id="gallery3" class="simple_gallery" ></div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="lib/simple.gallery.js"></script>
+    <script type="text/javascript" src="lib/simple.gallery.crawler.generic.js"></script>
+
+    <script type="text/javascript">
+      /*<![CDATA[*/
+     
+   
+      $('#gallery_data').hide();
+      var galleryData = new SimpleGalleryCrawlerGeneric($('#gallery_data')).getData();
+      
+      var gallery = new SimpleGallery();
+      gallery.setData(galleryData).render($('#gallery'));
+
+      
+      
+      
+      var gallery2 = new SimpleGallery({
+        galleryRenderer: function(self){
+          var html = 
+            '<div class="' + self.options.slidePanelClassName + '" style="display:none"></div>' + 
+            '<a href="javascript:void(0)" class="' + self.options.navLeftClassName + '" style="display:none">Backward</a>' + 
+            '<a href="javascript:void(0)" class="' + self.options.navRightClassName + '" style="display:none">Forward</a>' + 
+            '<div class="title_desc">' + 
+            '<h1></h1>' + 
+            '<div class="indicator">SLIDE <span class="currentNum"></span> OF <span class="totalNum"></span></div>' + 
+            '<p class="desc"></p>' + 
+            '</div>';
+
+          return $(html)
+        }
+      });
+      
+      
+      $('#gallery2').bind('simple.gallery.animation_completed', {}, function(e){
+        
+        var self = $(this);
+        
+        
+        var itemData = gallery2.getCurrentSlideData();
+        
+        self.find('h1').text(itemData.title);
+
+        self.find('.indicator .currentNum').text(gallery2.getCurrentSlide() + 1).show();
+        self.find('.indicator .totalNum').text(gallery2.getNumberSlides()).show();
+      });
+      
+      gallery2.setData(galleryData).render($('#gallery2'));
+      
+      
+      
+      
+     
+      
+      var gallery3 = new SimpleGallery({
+        galleryRenderer: function(self){
+          var html = 
+            '<div class="' + self.options.slidePanelClassName + '" style="display:none"></div>' + 
+            '<a href="javascript:void(0)" class="' + self.options.navLeftClassName + '" style="display:none"><img src="images/arrow-l.gif" alt="Backward"/></a>' + 
+            '<a href="javascript:void(0)" class="' + self.options.navRightClassName + '" style="display:none"><img src="images/arrow-r.gif" alt="Forward"/></a>' + 
+            '<div class="title_desc">' + 
+            '<h1></h1>' + 
+            '<div class="indicator">SLIDE <span class="currentNum"></span> OF <span class="totalNum"></span></div>' + 
+             
+            '</div>' + 
+            '<p class="desc"></p>';
+
+          return $(html)
+        }
+      });
+      
+      
+      $('#gallery3').bind('simple.gallery.animation_completed', {}, function(e){
+        
+        var self = $(this);
+        
+        
+        var itemData = gallery3.getCurrentSlideData();
+        
+        self.find('h1').text(itemData.title);
+
+        self.find('.indicator .currentNum').text(gallery3.getCurrentSlide() + 1).show();
+        self.find('.indicator .totalNum').text(gallery3.getNumberSlides()).show();
+        self.find('.desc').text(itemData.description).show();
+      });
+      
+      
+      gallery3.setData(galleryData).render($('#gallery3'));
+      $('.sg_black').show(); //to support fall back
+      
+      
+      
+      /*]]>*/
+    </script>
+
+  </body>
+</html>
+
